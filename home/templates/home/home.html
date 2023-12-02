@@ -1,0 +1,141 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+<section id="banner">
+    <div class="content">
+        <header>
+            <h2>Cerambyx</h2>
+            <p>Sistema IoT para detección de volátiles atrayentes del insecto Cerambyx</p>
+        </header>
+        <span class="image"><img src="media/home/cerambyx_circle.JPG" alt="Imagen de Cerambyx" /></span>
+    </div>
+    <a href="#one" class="goto-next scrolly">Next</a>
+</section>
+
+<div class="wrapper style1" id="one">
+    <div class="container">
+        <div class="row gtr-150">
+            <div class="col-8 col-12-medium">
+
+                <!-- Content -->
+                <section id="content">
+                    <h3>¿Qué es un cerambyx?</h3>
+                    <p> Los cerambyx son un grupo de insectos pertenecientes a la familia Cerambycidae, un subfamilia de
+                        coleópteros
+                        o escarabajos. </p>
+                    <h3>¿Cómo son?</h3>
+                    <p>Son insectos grandes, pueden llegar a medir hasta 6cm. Son de color negro en su totalidad a
+                        excepción de la punta de las alas, que tiene un color marrón oscuro. Cuerpo alargado y con
+                        antenas largas y curvadas.</p>
+                    <h3>¿Qué problemas generan?</h3>
+                    <p> Los cerambyx son insectos que se alimentan de la madera, tambien llamados xilófagos.</br>
+                        Después de la reproducción, las hembras ovipositan bajo la corteza del tronco de las encinas.
+                        Cuando las larvas eclosionan, comienzan a alimentarse de la corteza y la madera, cavando a su
+                        paso una serie de galerias de gran tamaño.
+                    </p>
+                    <ul>
+                        <li>Pérdida de masa foliar</li>
+                        <li>Secado del árbol</li>
+                        <li>Pérdida de resistencia biomecánica de la madera</li>
+                        <li>Trasporte de enfermedades</li>
+                        <li>Pérdidad de su valor económico</li>
+                    </ul>
+
+                </section>
+
+            </div>
+            <div class="col-4 col-12-medium">
+
+                <!-- Sidebar -->
+                <section id="sidebar">
+                    <div class="ContainerCenter">
+                        <!-- Radio Seleccionar -->
+                        <input type="radio" name="Carrusel" id="Slider1" checked>
+                        <input type="radio" name="Carrusel" id="Slider2">
+                        <input type="radio" name="Carrusel" id="Slider3">
+
+                        <div class="Carrusels">
+                            <!-- Imagen contenido -->
+                            <div class="Carrusel" style="background-image: url(media/home/cerambyx_slider_1.JPG);">
+                            </div>
+                            <div class="Carrusel" style="background-image: url(media/home/cerambyx_slider_2.JPG);">
+                            </div>
+                            <div class="Carrusel"
+                                style="background-image: url(media/home/cerambyx_slider_3-removebg-preview.png);">
+                            </div>
+
+                            <!-- Flechas a la izquierda por cada imagen -->
+                            <label for="Slider3" class="ArrowLeft Arrow1">❮</label>
+                            <label for="Slider1" class="ArrowLeft Arrow2">❮</label>
+                            <label for="Slider2" class="ArrowLeft Arrow3">❮</label>
+
+                            <!-- Flechas a la derecha por cada imagen -->
+                            <label for="Slider2" class="ArrowRight Arrow1">❯</label>
+                            <label for="Slider3" class="ArrowRight Arrow2">❯</label>
+                            <label for="Slider1" class="ArrowRight Arrow3">❯</label>
+                        </div>
+
+                        <!-- Selector circulos inferiores colgantes -->
+                        <div class="Selectors">
+                            <label for="Slider1" class="Selector"></label>
+                            <label for="Slider2" class="Selector"></label>
+                            <label for="Slider3" class="Selector"></label>
+                        </div>
+
+                    </div>
+                    <p style="text-align: right; font-size: 75%;">Fotos de cerambyx</p>
+
+                    <hr />
+
+                    <div class="ContainerCenter">
+                        <!-- Radio Seleccionar -->
+                        <input type="radio" name="Sld" id="S1" checked>
+                        <input type="radio" name="Sld" id="S2">
+                        <input type="radio" name="Sld" id="S3">
+
+                        <div class="Slider">
+                            <!-- Imagen contenido -->
+                            <div class="Sld" style="background-image: url(media/images/pic01.jpg);">
+                            </div>
+                            <div class="Sld" style="background-image: url(media/images/pic02.jpg);">
+                            </div>
+                            <div class="Sld" style="background-image: url(media/images/pic03.jpg);">
+                            </div>
+
+                            <!-- Flechas a la izquierda por cada imagen -->
+                            <label for="S3" class="AL A1">❮</label>
+                            <label for="S1" class="AL A2">❮</label>
+                            <label for="S2" class="AL A3">❮</label>
+
+                            <!-- Flechas a la derecha por cada imagen -->
+                            <label for="S2" class="AR A1">❯</label>
+                            <label for="S3" class="AR A2">❯</label>
+                            <label for="S1" class="AR A3">❯</label>
+                        </div>
+
+                        <!-- Selector circulos inferiores colgantes -->
+                        <div class="select">
+                            <label for="S1" class="slt"></label>
+                            <label for="S2" class="slt"></label>
+                            <label for="S3" class="slt"></label>
+                        </div>
+
+                    </div>
+                    <p style="text-align: right; font-size: 75%;">Fotos de cerambyx</p>
+
+                    <hr />
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
