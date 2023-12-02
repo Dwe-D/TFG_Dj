@@ -25,7 +25,7 @@ input {
 }
 
 /* Slider */
-.Carrusels {
+.Carrusels, .Slider {
 	height: 300px;
 	width: 500px;
 	position: relative;
@@ -33,7 +33,9 @@ input {
 	max-width: 100%;
 }
 
-.Carrusels .Carrusel {
+
+.Carrusels .Carrusel,
+.Slider .Sld {
 	height: 100%;
 	width: 100%;
 	position: absolute;
@@ -43,47 +45,49 @@ input {
 }
 
 /* Estado 1 */
-#Slider1:checked~.Carrusels .Carrusel:nth-of-type(1) {
+#Slider1, #S1:checked~.Carrusels .Carrusel:nth-of-type(1) {
 	transform: translate(0%, 0);
 }
 
-#Slider1:checked~.Carrusels .Carrusel:nth-of-type(2) {
+#Slider1, #S1:checked~.Carrusels .Carrusel:nth-of-type(2) {
 	transform: translate(100%, 0);
 }
 
-#Slider1:checked~.Carrusels .Carrusel:nth-of-type(3) {
+#Slider1, #S1:checked~.Carrusels .Carrusel:nth-of-type(3) {
 	transform: translate(200%, 0);
 }
 
 /* Estado 2 */
-#Slider2:checked~.Carrusels .Carrusel:nth-of-type(1) {
+#Slider2, #S2:checked~.Carrusels .Carrusel:nth-of-type(1) {
 	transform: translate(-100%, 0);
 }
 
-#Slider2:checked~.Carrusels .Carrusel:nth-of-type(2) {
+#Slider2, #S2:checked~.Carrusels .Carrusel:nth-of-type(2) {
 	transform: translate(0%, 0);
 }
 
-#Slider2:checked~.Carrusels .Carrusel:nth-of-type(3) {
+#Slider2, #S2:checked~.Carrusels .Carrusel:nth-of-type(3) {
 	transform: translate(100%, 0);
 }
 
 /* Estado 3 */
-#Slider3:checked~.Carrusels .Carrusel:nth-of-type(1) {
+#Slider3, #S3:checked~.Carrusels .Carrusel:nth-of-type(1) {
 	transform: translate(-200%, 0);
 }
 
-#Slider3:checked~.Carrusels .Carrusel:nth-of-type(2) {
+#Slider3, #S3:checked~.Carrusels .Carrusel:nth-of-type(2) {
 	transform: translate(-100%, 0);
 }
 
-#Slider3:checked~.Carrusels .Carrusel:nth-of-type(3) {
+#Slider3, #S3:checked~.Carrusels .Carrusel:nth-of-type(3) {
 	transform: translate(0%, 0);
 }
 
 /* Flechas */
 .Carrusels .ArrowLeft,
-.Carrusels .ArrowRight {
+.Carrusels .ArrowRight,
+.Slider .AL,
+.Slider .AR {
 	position: absolute;
 	height: 100%;
 	width: 2em;
@@ -93,11 +97,13 @@ input {
 	user-select: none;
 }
 
-.Carrusels .ArrowLeft {
+.Carrusels .ArrowLeft,
+.Slider .AL {
 	left: 0px;
 }
 
-.Carrusels .ArrowRight {
+.Carrusels .ArrowRight,
+.Slider .AR {
 	right: 0px;
 }
 
@@ -114,115 +120,6 @@ input {
 	display: flex;
 }
 
-/* Selectores */
-.Selectors {
-	width: 60px;
-	padding: 15px;
-	display: flex;
-	justify-content: space-between;
-}
-
-.Selectors .Selector {
-	background-color: #e44c65;
-	height: 10px;
-	width: 10px;
-	display: block;
-	border-radius: 5px;
-}
-
-/* Condicionales para botón inferior */
-#Slider1:checked~.Selectors .Selector:nth-of-type(1) {
-	background-color: #ffffff;
-}
-
-#Slider2:checked~.Selectors .Selector:nth-of-type(2) {
-	background-color: #ffffff;
-}
-
-#Slider3:checked~.Selectors .Selector:nth-of-type(3) {
-	background-color: #ffffff;
-}
-
-/*------------------------------------------------------------------------*/
-
-/* Slider */
-.Slider {
-	height: 300px;
-	width: 500px;
-	position: relative;
-	overflow-x: hidden;
-	max-width: 100%;
-}
-
-.Slider .Sld {
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	background-size: cover;
-	overflow-y: hidden;
-	transition: all .5s ease;
-}
-
-/* Estado 1 */
-#S1:checked~.Slider .Sld:nth-of-type(1) {
-	transform: translate(0%, 0);
-}
-
-#S1:checked~.Slider .Sld:nth-of-type(2) {
-	transform: translate(100%, 0);
-}
-
-#S1:checked~.Slider .Sld:nth-of-type(3) {
-	transform: translate(200%, 0);
-}
-
-/* Estado 2 */
-#S2:checked~.Slider .Sld:nth-of-type(1) {
-	transform: translate(-100%, 0);
-}
-
-#S2:checked~.Slider .Sld:nth-of-type(2) {
-	transform: translate(0%, 0);
-}
-
-#S2:checked~.Slider .Sld:nth-of-type(3) {
-	transform: translate(100%, 0);
-}
-
-/* Estado 3 */
-#S3:checked~.Slider .Sld:nth-of-type(1) {
-	transform: translate(-200%, 0);
-}
-
-#S3:checked~.Slider .Sld:nth-of-type(2) {
-	transform: translate(-100%, 0);
-}
-
-#S3:checked~.Slider .Sld:nth-of-type(3) {
-	transform: translate(0%, 0);
-}
-
-/* Flechas */
-.Slider .AL,
-.Slider .AR {
-	position: absolute;
-	height: 100%;
-	width: 2em;
-	align-items: center;
-	justify-content: center;
-	display: none;
-	user-select: none;
-}
-
-.Slider .AL {
-	left: 0px;
-}
-
-.Slider .AR {
-	right: 0px;
-}
-
-/* Configuracion de flechas individuales */
 #S1:checked~.Slider .A1 {
 	display: flex;
 }
@@ -235,7 +132,9 @@ input {
 	display: flex;
 }
 
+
 /* Selectores */
+.Selectors,
 .select {
 	width: 60px;
 	padding: 15px;
@@ -243,7 +142,8 @@ input {
 	justify-content: space-between;
 }
 
-.select .slt {
+.Selectors .Selector,
+.select .slt  {
 	background-color: #e44c65;
 	height: 10px;
 	width: 10px;
@@ -252,19 +152,17 @@ input {
 }
 
 /* Condicionales para botón inferior */
-#S1:checked~.select .slt:nth-of-type(1) {
+#Slider1, #S1:checked~.Selectors .Selector:nth-of-type(1) {
 	background-color: #ffffff;
 }
 
-#S2:checked~.select .slt:nth-of-type(2) {
+#Slider2, #S2:checked~.Selectors .Selector:nth-of-type(2) {
 	background-color: #ffffff;
 }
 
-#S3:checked~.select .slt:nth-of-type(3) {
+#Slider3, #S3:checked~.Selectors .Selector:nth-of-type(3) {
 	background-color: #ffffff;
 }
-
-
 
 
 html,
