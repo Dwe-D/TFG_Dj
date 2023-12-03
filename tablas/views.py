@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import NumerosModel
+import django.middleware.csrf
+
 # Create your views here.
 @csrf_exempt
 def tabla(request):
@@ -24,7 +26,10 @@ def procesar_datos_ttn(request):
         numeros = NumerosModel(numero1=numero1, numero2=numero2)
         numeros.save()
 
-        return HttpResponse()
+        # Add the csrftoken cookie to the response
+        response = HttpResponse()
+        response.set_cookie('csrftoken', django.middleware.csrf.get_token(request))
+        return response
     except Exception as e:
         # Handle any exceptions that occur during data processing
         print(f"Error processing JSON data: {e}")
