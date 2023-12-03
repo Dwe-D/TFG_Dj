@@ -15,14 +15,16 @@ def webhook(request):
     if request.method == 'POST':
         # Parsear el JSON de la solicitud
         data = json.loads(request.body)
-        numero1 = data.get('numero1')  # Corregir el nombre de la variable
-        numero2 = data.get('numero2')  # Corregir el nombre de la variable
+        numero1 = data.get('numero1', 0)  # Establecer un valor predeterminado de 0 si 'numero1' no está presente
+        numero2 = data.get('numero2', 0)
 
         # Guardar en la base de datos
-        # Suponiendo que tienes un modelo llamado "NumerosModel" con campos "numero1" y "numero2"
-        mi_modelo = NumerosModel(numero1=numero1, numero2=numero2)
-        mi_modelo.save()
+        try:
+            mi_modelo = NumerosModel(numero1=numero1, numero2=numero2)
+            mi_modelo.save()
+            return JsonResponse({'mensaje': 'Datos guardados correctamente'})
+        except Exception as e:
+            return JsonResponse({'error': f'Error al guardar en la base de datos: {str(e)}'}, status=500)
 
-        return JsonResponse({'mensaje': 'Datos guardados correctamente'})
     else:
         return JsonResponse({'error': 'Solicitud no válida'}, status=400)
