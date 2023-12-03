@@ -10,8 +10,9 @@ def tabla(request):
 
     return render(request, "tablas/tabla.html")
 
+"""
 @csrf_exempt
-def procesar_datos_ttn(request):
+ def procesar_datos_ttn(request):
     if request.method == 'POST':
         try:
             # Obtener el contenido JSON de la solicitud
@@ -36,3 +37,7 @@ def procesar_datos_ttn(request):
             return HttpResponseBadRequest(f"Error desconocido: {e}")
     else:
         return HttpResponseBadRequest("Se esperaba una solicitud POST.")
+"""
+def procesar_datos_ttn(request):
+    print(request.body)
+    # Resto del código
