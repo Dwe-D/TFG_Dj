@@ -1,38 +1,26 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 import json
 from .models import NumerosModel
-import django.middleware.csrf
 
 # Create your views here.
 def tabla(request):
 
     return render(request, "tablas/tabla.html")
+
 @csrf_exempt
-
-def procesar_datos_ttn(request):
+@require_POST
+def webhook(request):
     if request.method == 'POST':
-        try:
-            # Obtener el contenido JSON de la solicitud
-            content = json.loads(request.body.decode('utf-8'))
-
-            # Extraer los datos que necesitas
-            numero1 = content.get('numero1')
-            numero2 = content.get('numero2')
-
-            # Validar que ambos números estén presentes
-            if numero1 is not None and numero2 is not None:
-                # Crear una instancia del modelo y guardar en la base de datos
-                numeros = NumerosModel(numero1=numero1, numero2=numero2)
-                numeros.save()
-
-                return HttpResponse("Datos guardados exitosamente.")
-            else:
-                return HttpResponseBadRequest("Número1 y Número2 son campos obligatorios.")
-        except json.JSONDecodeError:
-            return HttpResponseBadRequest("Error al decodificar JSON.")
-        except Exception as e:
-            return HttpResponseBadRequest(f"Error desconocido: {e}")
+        data = json.loads(request.body)
+        # Procesa los datos entrantes aquí
+        # Extraer los datos que necesitas
+        numero1 = data.get('numero1')
+        numero2 = data.get('numero2')
+        numeros = NumerosModel(numero1=numero1, numero2=numero2)
+        numeros.save()
+        return HttpResponse(status=200)
     else:
-        return HttpResponseBadRequest("Se esperaba una solicitud POST.")
+        return HttpResponse(status=405)
