@@ -6,11 +6,11 @@ from .models import NumerosModel
 import django.middleware.csrf
 
 # Create your views here.
-@csrf_exempt
 def tabla(request):
 
     return render(request, "tablas/tabla.html")
 
+@csrf_exempt
 def procesar_datos_ttn(request):
     if request.method == 'POST':
         try:
