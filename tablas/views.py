@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import NumerosModel
 # Create your views here.
-
+@csrf_exempt
 def tabla(request):
 
     return render(request, "tablas/tabla.html")
