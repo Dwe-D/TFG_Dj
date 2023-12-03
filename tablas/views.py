@@ -13,11 +13,15 @@ def tabla(request):
 
 @csrf_exempt
 
+@csrf_exempt
 def webhook(request):
     if request.method == 'POST':
         try:
             # Parsear el JSON de la solicitud
             data = json.loads(request.body)
+
+            # Imprimir el JSON recibido
+            print("JSON recibido:", data)
 
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
             numero1 = data['data']['uplink_message']['decoded_payload']['numero1']
@@ -32,3 +36,4 @@ def webhook(request):
             return JsonResponse({'error': f'Error al procesar la solicitud: {str(e)}'}, status=500)
     else:
         return JsonResponse({'error': 'Solicitud no válida'}, status=400)
+
