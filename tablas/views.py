@@ -19,6 +19,11 @@ def webhook(request):
         # Extraer los datos que necesitas
         numero1 = data.get('numero1')
         numero2 = data.get('numero2')
+        if numero1 is  None :
+           numero1=777
+        elif numero2 is None :
+            numero2=777
+           
         numeros = NumerosModel(numero1=numero1, numero2=numero2)
         numeros.save()
         return HttpResponse(status=200)
