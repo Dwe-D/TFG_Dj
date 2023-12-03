@@ -17,7 +17,16 @@ def webhook(request):
         data = json.loads(request.body)
 
         # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
-        decoded_payload = data.get('data', {}).get('uplink_message', {}).get('decoded_payload', {})
+        decoded_payload_base64 = data.get('data', {}).get('uplink_message', {}).get('decoded_payload', {}).get('frm_payload', '')
+        
+        # Decodificar la cadena Base64
+        try:
+            decoded_payload_bytes = base64.b64decode(decoded_payload_base64)
+            decoded_payload_str = decoded_payload_bytes.decode('utf-8')
+            decoded_payload = json.loads(decoded_payload_str)
+        except (base64.binascii.Error, json.JSONDecodeError) as e:
+            return JsonResponse({'error': f'Error al decodificar el payload: {str(e)}'}, status=400)
+
         numero1 = decoded_payload.get('numero1', 0)  # Establecer un valor predeterminado de 0 si 'numero1' no está presente
         numero2 = decoded_payload.get('numero2', 0)  # Establecer un valor predeterminado de 0 si 'numero2' no está presente
 
