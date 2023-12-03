@@ -13,7 +13,7 @@ def tabla(request):
 @csrf_exempt
 def webhook(request):
     if request.method == 'POST':
-        data = request.POST
+        data = json.loads(request.body)
         numero1 = data.get('numero1')
         numero2 = data.get('numero2')
         NumerosModel.objects.create(numero1=numero1, numero2=numero2)
