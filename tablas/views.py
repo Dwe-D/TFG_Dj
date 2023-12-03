@@ -20,9 +20,8 @@ def webhook(request):
             data = json.loads(request.body)
 
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
-            decoded_payload = data.get('data', {}).get('uplink_message', {}).get('decoded_payload', {})
-            numero1 = decoded_payload.get('numero1', 0)
-            numero2 = decoded_payload.get('numero2', 0)
+            numero1 = data['data']['uplink_message']['decoded_payload']['numero1']
+            numero2 = data['data']['uplink_message']['decoded_payload']['numero1']
 
             # Guardar en la base de datos
             mi_modelo = NumerosModel(numero1=numero1, numero2=numero2)
