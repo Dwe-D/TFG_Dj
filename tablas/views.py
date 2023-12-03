@@ -12,25 +12,27 @@ def tabla(request):
     return render(request, "tablas/tabla.html")
 
 def procesar_datos_ttn(request):
-    try:
-        data = request.body.decode("utf-8")
-        payload = json.loads(data)
+    if request.method == 'POST':
+        try:
+            # Obtener el contenido JSON de la solicitud
+            content = json.loads(request.body.decode('utf-8'))
 
-        # Validate the decoded data
-        print(json.dumps(payload, indent=4))  # Print the decoded payload for inspection
+            # Extraer los datos que necesitas
+            numero1 = content.get('numero1')
+            numero2 = content.get('numero2')
 
-        numero1 = payload["data"]["uplink_message"]["decoded_payload"]["numero1"]
-        numero2 = payload["data"]["uplink_message"]["decoded_payload"]["numero2"]
+            # Validar que ambos números estén presentes
+            if numero1 is not None and numero2 is not None:
+                # Crear una instancia del modelo y guardar en la base de datos
+                numeros = NumerosModel(numero1=numero1, numero2=numero2)
+                numeros.save()
 
-        # Create a new instance of the NumerosModel and save it to the database
-        numeros = NumerosModel(numero1=numero1, numero2=numero2)
-        numeros.save()
-
-        # Add the csrftoken cookie to the response
-        response = HttpResponse()
-        response.set_cookie('csrftoken', django.middleware.csrf.get_token(request))
-        return response
-    except Exception as e:
-        # Handle any exceptions that occur during data processing
-        print(f"Error processing JSON data: {e}")
-        return HttpResponseBadRequest()
+                return HttpResponse("Datos guardados exitosamente.")
+            else:
+                return HttpResponseBadRequest("Número1 y Número2 son campos obligatorios.")
+        except json.JSONDecodeError:
+            return HttpResponseBadRequest("Error al decodificar JSON.")
+        except Exception as e:
+            return HttpResponseBadRequest(f"Error desconocido: {e}")
+    else:
+        return HttpResponseBadRequest("Se esperaba una solicitud POST.")
