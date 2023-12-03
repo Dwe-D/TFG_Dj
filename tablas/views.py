@@ -13,10 +13,16 @@ def tabla(request):
 @csrf_exempt
 def webhook(request):
     if request.method == 'POST':
+        # Parsear el JSON de la solicitud
         data = json.loads(request.body)
-        numero1 = data.get('numero1')
+        nuemro1 = data.get('nuemro1')
         numero2 = data.get('numero2')
-        NumerosModel.objects.create(numero1=numero1, numero2=numero2)
-        return JsonResponse({'status': 'success'}, status=200)
+
+        # Guardar en la base de datos
+        # Suponiendo que tienes un modelo llamado "MiModelo" con campos "campo1" y "campo2"
+        mi_modelo = NumerosModel(numero1=nuemro1, numero=numero2)
+        mi_modelo.save()
+
+        return JsonResponse({'mensaje': 'Datos guardados correctamente'})
     else:
-        return JsonResponse({'status': 'failed', 'error': 'Not a POST request'}, status=400)
+        return JsonResponse({'error': 'Solicitud no válida'}, status=400)
