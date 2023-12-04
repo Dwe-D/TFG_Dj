@@ -16,8 +16,8 @@ def webhook(request):
     if request.method == 'POST':
         try:
             # Parsear el JSON de la solicitud
-            data = json.loads(request.body)
-            data = '''
+            #data = json.loads(request.body)
+            json_data = '''
 {
   "name": "as.up.data.forward",
   "time": "2023-12-03T23:26:23.824851850Z",
@@ -118,6 +118,10 @@ def webhook(request):
   "unique_id": "01HGS0282GZQN1RF62Y750ETFC"
 }
 '''
+
+# Parse JSON data
+            data = json.loads(json_data)
+            
 
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
             numero1 = data.get('data', {}).get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
