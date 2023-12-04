@@ -22,8 +22,8 @@ def webhook(request):
             print("JSON recibido:", data)
 
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
-            numero1 = data.get('data', {}).get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
-            numero2 = data.get('data', {}).get('uplink_message', {}).get('decoded_payload', {}).get('numero2')
+            numero1 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
+            numero2 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero2')
             
             print("numero1:", numero1)
             print("numero2:", numero2)
