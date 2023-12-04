@@ -15,11 +15,11 @@ def tabla(request):
 def webhook(request):
     if request.method == 'POST':
         try:
-            # Decodificar el contenido del cuerpo de la solicitud
-            body_content = request.body.decode('utf-8')
-
             # Parsear el JSON de la solicitud
-            data = json.loads(body_content)
+            data = json.loads(request.body)
+            
+            #data = json.loads(json_data)
+            print("JSON recibido:", data)
 
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
             numero1 = data.get('data', {}).get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
