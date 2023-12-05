@@ -16,7 +16,6 @@ def webhook(request):
     if request.method == 'POST':
         try:
             # Parsear el JSON de la solicitud
-<<<<<<< HEAD
             json = json.loads(request.body)
  
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
@@ -27,20 +26,6 @@ def webhook(request):
             numero1 = 0 if numero1 is None else numero1
             numero2 = 0 if numero2 is None else numero2
 
-=======
-            data = json.loads(request.body)
-            print("json: ", data)
-            # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
-            numero1 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
-            numero2 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero2')
-            """numero3 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero3')
-            bolea = data.get('uplink_message', {}).get('decoded_payload', {}).get('bolea')
-            erbolean = True if bolea == 1 else False
-            print("num1: ", numero1)
-            print("num2: ", numero2)
-            print("num3: ", numero3)
-            print("bolea: ", bolea)"""
->>>>>>> 06eae7bee3738e317ae621490733880d5daa4f4e
 
             # Guardar en la base de datos
             mi_modelo = sensores1(numero1=numero1, numero2=numero2)
