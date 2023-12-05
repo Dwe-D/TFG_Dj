@@ -5,7 +5,8 @@ class sensores(models.Model):
     numero1 = models.IntegerField()
     numero2 = models.IntegerField()
     numero3 = models.FloatField()
-    booleano = models.BooleanField(default=True)
+    #booleano = models.BooleanField(default=True)
+    booleano = models.FloatField()
 
     #def __str__(self):
     #    return f"Números ({self.numero1}, {self.numero2})"

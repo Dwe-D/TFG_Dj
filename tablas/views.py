@@ -30,7 +30,7 @@ def webhook(request):
             print("bolea: ", bolea)
 
             # Guardar en la base de datos
-            mi_modelo = sensores(numero1=numero1, numero2=numero2, numero3=numero3, bolea=erbolean)
+            mi_modelo = sensores(numero1=numero1, numero2=numero2, numero3=numero3, bolea=bolea)
             mi_modelo.save()
 
             return JsonResponse({'mensaje': 'Datos guardados correctamente'})
