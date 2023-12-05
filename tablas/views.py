@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 import json
 import base64
-from .models import sensores1
+from bd.models import sensores
 
 # Create your views here.
 def tabla(request):
@@ -29,7 +29,7 @@ def webhook(request):
 
 
             # Guardar en la base de datos
-            mi_modelo = sensores1(numero1=numero1, numero2=numero2)
+            mi_modelo = sensores(numero1=numero1, numero2=numero2)
             mi_modelo.save()
 
             return JsonResponse({'mensaje': 'Datos guardados correctamente'})

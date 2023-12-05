@@ -1,6 +1,6 @@
 from django.db import models
 
-class sensores1(models.Model):
+class numerosModel(models.Model):
     #created = models.DateTimeField(auto_now_add=True)
     numero1 = models.IntegerField()
     numero2 = models.IntegerField()
