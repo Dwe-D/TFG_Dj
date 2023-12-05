@@ -16,11 +16,11 @@ def webhook(request):
     if request.method == 'POST':
         try:
             # Parsear el JSON de la solicitud
-            data = json.loads(request.body)
+            json = json.loads(request.body)
  
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
-            numero1 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
-            numero2 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero2')
+            numero1 = json.get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
+            numero2 = json.get('uplink_message', {}).get('decoded_payload', {}).get('numero2')
 
             # Verificar si los campos son None y establecer valores predeterminados
             numero1 = 0 if numero1 is None else numero1
