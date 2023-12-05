@@ -8,3 +8,4 @@ class teclado(models.Model):
     numero2 = models.IntegerField()
     numero3 = models.FloatField()
     numeroB = models.BooleanField()
+    

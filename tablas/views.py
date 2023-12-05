@@ -6,11 +6,39 @@ import json
 import base64
 from bd.models import sensores
 from bd_masfilas.models import teclado
+from math import ceil
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 # Create your views here.
 def tabla(request):
-    datos_teclado = teclado.objects.all()
-    return render(request, "tablas/tabla.html",{'datos_teclado': datos_teclado,})
+    cantidad_por_pagina = 25
+    page = request.GET.get('page', 1)
+    
+    # Obtener todos los datos de la base de datos
+    todos_los_datos_teclado = teclado.objects.all()
+
+    # Calcular el número máximo de páginas
+    num_paginas = ceil(len(todos_los_datos_teclado) / cantidad_por_pagina)
+
+    # Usar Paginator para obtener la porción de datos para la página actual
+    paginator = Paginator(todos_los_datos_teclado, cantidad_por_pagina)
+    try:
+        datos_teclado = paginator.page(page)
+    except PageNotAnInteger:
+        datos_teclado = paginator.page(1)
+    except EmptyPage:
+        datos_teclado = paginator.page(paginator.num_pages)
+
+    # Pasa los datos al template
+    context = {
+        'datos_teclado': datos_teclado,
+        'page': int(page),
+        'cantidad_por_pagina': cantidad_por_pagina,
+        'num_paginas': num_paginas,
+    }
+
+    return render(request, "tablas/tabla.html", context)
 
 @csrf_exempt
 def webhook(request):
