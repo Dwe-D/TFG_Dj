@@ -23,14 +23,11 @@ def webhook(request):
             numero2 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero2')
             numero3 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero3')
             bolea = data.get('uplink_message', {}).get('decoded_payload', {}).get('bolea')
-            if bolea == 1:
-                bolea=True
-            else:
-                bolea=False
+            erbolean = True if bolea == 1 else False
     
 
             # Guardar en la base de datos
-            mi_modelo = sensores(numero1=numero1, numero2=numero2, numero3=numero3, bolea=bolea)
+            mi_modelo = sensores(numero1=numero1, numero2=numero2, numero3=numero3, bolea=erbolean)
             mi_modelo.save()
 
             return JsonResponse({'mensaje': 'Datos guardados correctamente'})
