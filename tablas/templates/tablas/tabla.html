@@ -6,19 +6,21 @@
             <table class="alt">
                 <thead>
                     <tr>
-                        <th>Hora</th>
-                        <th>Temperatura</th>
-                        <th>Humedad</th>
-                        <th>Algo mas</th>
+                        <th>Numero 1:</th>
+                        <th>Numero 2:</th>
+                        <th>Numero 3:</th>
+                        <th>Detectado</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for teclado in datos_teclado %}
                     <tr>
-                        <td>Sos puto</td>
-                        <td>Si lo sos</td>
-                        <td>apsdj</td>
+                        <td>{{ teclado.numero1 }}</td>
+                        <td>{{ teclado.numero2 }}</td>
+                        <td>{{ teclado.numero3 }}</td>
+                        <td>{{ teclado.numeroB }}</td>
                     </tr>
-                   
+                    {% endfor %}
                 </tbody>
                 
             </table>

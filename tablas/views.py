@@ -9,8 +9,8 @@ from bd_masfilas.models import teclado
 
 # Create your views here.
 def tabla(request):
-
-    return render(request, "tablas/tabla.html")
+    datos_teclado = teclado.objects.all()
+    return render(request, "tablas/tabla.html",{'datos_teclado': datos_teclado,})
 
 @csrf_exempt
 def webhook(request):
