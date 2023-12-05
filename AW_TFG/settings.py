@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'login',
     'tablas',
     'bd',
+    'bd_masfilas',
 ]
 
 MIDDLEWARE = [
