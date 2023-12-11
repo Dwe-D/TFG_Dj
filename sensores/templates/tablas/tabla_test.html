@@ -1,0 +1,47 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+<h3></h3>
+    <div class="table-wrapper" style="width: 60%; margin: auto;">
+        <table class="alt">
+            <thead>
+                <tr>
+                    <th>EUI:</th>
+                    <th>Alias:</th>
+                    <th>Fecha</th>
+                    <th>temp</th>
+                    <th>hum</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for teclado in datos_teclado %}
+                <tr>
+                    <td>{{ teclado.dispositivo.dispositivo_id }}</td>
+                    <td>{{ teclado.dispositivo.alias }}</td>
+                    <td>{{ teclado.fecha_creacion }}</td>
+                    <td>{{ teclado.temp }}</td>
+                    <td>{{ teclado.hum }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if datos_teclado.has_next %}
+			<form method="get" action="" style="display: inline; float: right;">
+				<button type="submit" class="button primary small" name="page" value="{{ page|add:1 }}">Mostrar más</button>
+			</form>
+        {% endif %}
+
+        {% if datos_teclado.has_previous %}
+			<form method="get" action="" style="display: inline; float: left;">
+				<button type="submit" class="button primary small" name="page" value="{{ page|add:-1 }}">Mostrar menos</button>
+			</form>
+        {% endif %}
+
+        <p style="clear: left;">
+            Página <a href="?page=1">1</a>...{{ page }}...<a href="?page={{ num_paginas }}">{{ num_paginas }}</a>
+        </p>
+	</div>
+
+
+{% endblock %}

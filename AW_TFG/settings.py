@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'home',
     'login',
-    'tablas',
-    'bd',
+    'sensores',
     'bd_masfilas',
 ]
 

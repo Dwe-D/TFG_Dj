@@ -1,0 +1,27 @@
+<!-- registro_dispositivo.html -->
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<form method="post" action="{% url 'reg' %}" style="width: 70%; margin: auto;">
+    {% csrf_token %}
+    
+    {{ form.non_field_errors }}
+    
+    <div>
+        {{ form.dispositivo_id.errors }}
+        <label for="{{ form.dispositivo_id.id_for_label }}">Dispositivo ID:</label>
+        <input type="text" name="{{ form.dispositivo_id.name }}" placeholder="eui-a0000a0000000000">
+    </div>
+    
+    <div>
+        {{ form.alias.errors }}
+        <label for="{{ form.alias.id_for_label }}">Alias (opcional):</label>
+        {{ form.alias }}
+    </div>
+
+    <button type="submit" class="button primary" style="margin-top: 3px">Registrar</button>
+</form>
+
+{% endblock %}
