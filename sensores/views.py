@@ -19,14 +19,13 @@ def tabla(request):
         page = request.GET.get('page', 1)
         
         # Obtener todos los datos de la base de datos
-        #todos_los_datos_teclado = teclado.objects.all()
-        todos_los_datos_teclado = DatosDispositivo.objects.all()
+        datos_tabla = DatosDispositivo.objects.all()
 
         # Calcular el número máximo de páginas
-        num_paginas = ceil(len(todos_los_datos_teclado) / cantidad_por_pagina)
+        num_paginas = ceil(len(datos_tabla) / cantidad_por_pagina)
 
         # Usar Paginator para obtener la porción de datos para la página actual
-        paginator = Paginator(todos_los_datos_teclado, cantidad_por_pagina)
+        paginator = Paginator(datos_tabla, cantidad_por_pagina)
         try:
             datos_teclado = paginator.page(page)
         except PageNotAnInteger:

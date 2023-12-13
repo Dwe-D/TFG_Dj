@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 
-
+<br/>
 <form method="post" action="{% url 'reg' %}" style="width: 70%; margin: auto;">
     {% csrf_token %}
     
@@ -23,5 +23,5 @@
 
     <button type="submit" class="button primary" style="margin-top: 3px">Registrar</button>
 </form>
-
+<br/>
 {% endblock %}
