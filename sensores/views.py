@@ -17,9 +17,9 @@ def tabla(request):
     if request.user.is_authenticated:
         cantidad_por_pagina = 25
         page = request.GET.get('page', 1)
-        
-        # Obtener todos los datos de la base de datos
-        datos_tabla = DatosDispositivo.objects.all()
+
+        # Filtra los DatosDispositivo asociados al usuario actual y ordena por fecha de creación descendente
+        datos_tabla = DatosDispositivo.objects.filter(dispositivo__usuario=request.user).order_by('-fecha_creacion')
 
         # Calcular el número máximo de páginas
         num_paginas = ceil(len(datos_tabla) / cantidad_por_pagina)
@@ -40,7 +40,6 @@ def tabla(request):
             'cantidad_por_pagina': cantidad_por_pagina,
             'num_paginas': num_paginas,
         }
-        #return render(request, "tablas/tabla.html", context)
         return render(request, "tablas/tabla_test.html", context)
     else:
         return redirect('login')
