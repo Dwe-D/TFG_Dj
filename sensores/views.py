@@ -1,14 +1,12 @@
 # Create your views here.
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 import json
-import base64
 from bd_masfilas.models import teclado
 from math import ceil
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.contrib import messages
 from .forms import RegistroDispositivoForm
 from .models import UsuarioArduino, DatosDispositivo
 
@@ -145,3 +143,18 @@ def deco(request):
             return JsonResponse({'error': f'Error al procesar la solicitud: {str(e)}'}, status=500)
     else:
         return JsonResponse({'error': 'Solicitud no válida'}, status=400)
+    
+
+def listar_dispositivos(request):
+    dispositivos = UsuarioArduino.objects.filter(usuario=request.user)
+    return render(request, 'registro_dispositivo/eliminar_dispositivo.html', {'dispositivos': dispositivos})
+
+def eliminar_dispositivos(request):
+    if request.method == 'POST':
+        dispositivos_a_eliminar = request.POST.getlist('dispositivos_a_eliminar')
+        UsuarioArduino.objects.filter(id__in=dispositivos_a_eliminar).delete()
+        messages.success(request, 'Dispositivos eliminados exitosamente.')
+        return redirect('elimina')
+
+    return redirect('elimina')
+

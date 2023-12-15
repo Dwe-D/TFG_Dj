@@ -1,0 +1,33 @@
+<!-- registro_dispositivo.html -->
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<form id="eliminarForm" method="post" action="{% url 'eliminar_dispositivos' %}" style="margin-left: 2.5%;">
+  {% csrf_token %}
+  
+  {% if dispositivos %}
+    <br>
+    <h1 style="color: #e44c65; margin-left: 1.5%;">Lista de dispositivos:</h1>
+      <ul>
+          {% for dispositivo in dispositivos %}
+              <li>
+                <div class="col-6 col-12-medium">
+                    <input type="checkbox" id="{{ dispositivo.id }}" name="dispositivos_a_eliminar" value="{{ dispositivo.id }}">
+                    <label for="{{ dispositivo.id }}"> {{ dispositivo.alias|default:dispositivo.dispositivo_id }} - EUI: {{ dispositivo.dispositivo_id }} </label>
+                </div>
+              </li>
+          {% endfor %}
+      </ul>
+      <button type="button" class="button primary small fit" style="width: min-content;" onclick="confirmarEliminacion()">Eliminar seleccionados</button>
+  {% else %}
+    <br>
+    <p>No tienes dispositivos registrados.</p>
+  {% endif %}
+</form>
+
+
+
+{% endblock %}
