@@ -92,7 +92,7 @@ def reg(request):
     else:
         form = RegistroDispositivoForm()
 
-    return render(request, 'registro_dispositivo/registro_dispositivo.html', {'form': form})
+    return render(request, 'dispositivo/registro_dispositivo.html', {'form': form})
 
 def meter(request):
     eui12 = UsuarioArduino.objects.get(dispositivo_id='eui-a8610a3130467612')  # Reemplaza 'dispositivo_existente' con el dispositivo_id real
@@ -147,7 +147,7 @@ def deco(request):
 
 def listar_dispositivos(request):
     dispositivos = UsuarioArduino.objects.filter(usuario=request.user)
-    return render(request, 'registro_dispositivo/eliminar_dispositivo.html', {'dispositivos': dispositivos})
+    return render(request, 'dispositivo/eliminar_dispositivo.html', {'dispositivos': dispositivos})
 
 def eliminar_dispositivos(request):
     if request.method == 'POST':
