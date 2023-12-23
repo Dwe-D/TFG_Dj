@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'home',
     'login',
     'sensores',
-    'bd_masfilas',
 ]
 
 MIDDLEWARE = [

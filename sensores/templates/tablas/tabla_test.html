@@ -24,7 +24,11 @@
                     {% for dato_tabla in tabla %}
                     <tr>
                         <td>{{ dato_tabla.dispositivo.dispositivo_id }}</td>
-                        <td>{{ dato_tabla.dispositivo.alias }}</td>
+                        {% if dato_tabla.dispositivo.alias %}
+                            <td>{{ dato_tabla.dispositivo.alias }}</td>
+                        {% else %}
+                            <td> --- </td>
+                        {% endif %}
                         <td>{{ dato_tabla.fecha_creacion }}</td>
                         <td>{{ dato_tabla.temp }} ºC</td>
                         <td>{{ dato_tabla.hum }} %</td>

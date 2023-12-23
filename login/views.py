@@ -3,8 +3,10 @@ from django.views.generic import View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
 
 class VRegistro(View):
 
@@ -23,7 +25,7 @@ class VRegistro(View):
                 messages.error(request, form.error_messages[msg])
                 
             return render(request, "registro/registro.html", {"form":form})
-
+        
 def cerrar_sesion(request):
     logout(request)
     return redirect('Home')
@@ -48,3 +50,10 @@ def logear(request):
     form = AuthenticationForm()
     return render(request, "login/login.html", {"form": form})
 
+def eliminar_usuario(request):
+        if request.method == 'POST':
+            request.user.delete()
+            messages.success(request, 'Usuario eliminado exitosamente.')
+            return redirect('Home')
+        else:
+            return render(request, 'delete/eliminar_usuario.html')
