@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-{% if not datos_teclado %}
+{% if not tabla %}
     <br>
     <p style="margin-left: 1.5%; color:#e44c65;"> No hay datos disponibles</p>
 {% else %}
@@ -14,30 +14,41 @@
                         <th>EUI:</th>
                         <th>Alias:</th>
                         <th>Fecha</th>
-                        <th>temp</th>
-                        <th>hum</th>
+                        <th>Temp:</th>
+                        <th>H:</th>
+                        <th>Limoneno:</th>
+                        <th>Detectado:</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for teclado in datos_teclado %}
+                    {% for dato_tabla in tabla %}
                     <tr>
-                        <td>{{ teclado.dispositivo.dispositivo_id }}</td>
-                        <td>{{ teclado.dispositivo.alias }}</td>
-                        <td>{{ teclado.fecha_creacion }}</td>
-                        <td>{{ teclado.temp }}</td>
-                        <td>{{ teclado.hum }}</td>
+                        <td>{{ dato_tabla.dispositivo.dispositivo_id }}</td>
+                        <td>{{ dato_tabla.dispositivo.alias }}</td>
+                        <td>{{ dato_tabla.fecha_creacion }}</td>
+                        <td>{{ dato_tabla.temp }} ºC</td>
+                        <td>{{ dato_tabla.hum }} %</td>
+                        <td>{{ dato_tabla.limo }} ppm</td>
+                        <td <td style="text-align: center;">
+                            {% if dato_tabla.detec %}
+                                <span style="color: green;">✔</span>
+                            {% else %}
+                                <span style="color: red;">✘</span>
+                            {% endif %}
+                        </td>
+                        
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
 
-            {% if datos_teclado.has_next %}
+            {% if tabla.has_next %}
                 <form method="get" action="" style="display: inline; float: right;">
                     <button type="submit" class="button primary small" name="page" value="{{ page|add:1 }}">Mostrar más</button>
                 </form>
             {% endif %}
 
-            {% if datos_teclado.has_previous %}
+            {% if tabla.has_previous %}
                 <form method="get" action="" style="display: inline; float: left;">
                     <button type="submit" class="button primary small" name="page" value="{{ page|add:-1 }}">Mostrar menos</button>
                 </form>

@@ -1,10 +1,10 @@
 # forms.py
 from django import forms
-from .models import UsuarioArduino
+from .models import UsuarioDispositivo
 
 class RegistroDispositivoForm(forms.ModelForm):
     class Meta:
-        model = UsuarioArduino
+        model = UsuarioDispositivo
         fields = ['dispositivo_id', 'alias']
 
     def clean(self):
@@ -12,7 +12,7 @@ class RegistroDispositivoForm(forms.ModelForm):
         dispositivo_id = cleaned_data.get('dispositivo_id')
         alias = cleaned_data.get('alias')
 
-        if UsuarioArduino.objects.filter(dispositivo_id=dispositivo_id).exists():
+        if UsuarioDispositivo.objects.filter(dispositivo_id=dispositivo_id).exists():
             self.add_error('dispositivo_id', 'Este dispositivo ya está registrado.')
 
         return cleaned_data

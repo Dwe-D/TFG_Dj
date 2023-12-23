@@ -8,7 +8,7 @@ from math import ceil
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from .forms import RegistroDispositivoForm
-from .models import UsuarioArduino, DatosDispositivo
+from .models import UsuarioDispositivo, Datos
 
 # Create your views here.
 def tabla(request):
@@ -16,8 +16,8 @@ def tabla(request):
         cantidad_por_pagina = 25
         page = request.GET.get('page', 1)
 
-        # Filtra los DatosDispositivo asociados al usuario actual y ordena por fecha de creación descendente
-        datos_tabla = DatosDispositivo.objects.filter(dispositivo__usuario=request.user).order_by('-fecha_creacion')
+        # Filtra los Datos asociados al usuario actual y ordena por fecha de creación descendente
+        datos_tabla = Datos.objects.filter(dispositivo__usuario=request.user).order_by('-fecha_creacion')
 
         # Calcular el número máximo de páginas
         num_paginas = ceil(len(datos_tabla) / cantidad_por_pagina)
@@ -25,15 +25,15 @@ def tabla(request):
         # Usar Paginator para obtener la porción de datos para la página actual
         paginator = Paginator(datos_tabla, cantidad_por_pagina)
         try:
-            datos_teclado = paginator.page(page)
+            tabla = paginator.page(page)
         except PageNotAnInteger:
-            datos_teclado = paginator.page(1)
+            tabla = paginator.page(1)
         except EmptyPage:
-            datos_teclado = paginator.page(paginator.num_pages)
+            tabla = paginator.page(paginator.num_pages)
 
         # Pasa los datos al template
         context = {
-            'datos_teclado': datos_teclado,
+            'tabla': tabla,
             'page': int(page),
             'cantidad_por_pagina': cantidad_por_pagina,
             'num_paginas': num_paginas,
@@ -81,10 +81,10 @@ def reg(request):
             dispositivo_id = form.cleaned_data['dispositivo_id']
 
             # Verificar si el dispositivo_id ya existe
-            if UsuarioArduino.objects.filter(dispositivo_id=dispositivo_id).exists():
+            if UsuarioDispositivo.objects.filter(dispositivo_id=dispositivo_id).exists():
                 form.add_error('dispositivo_id', 'Este dispositivo ya está registrado.')
             else:
-                # Crear el objeto UsuarioArduino si el dispositivo_id es único
+                # Crear el objeto UsuarioDispositivo si el dispositivo_id es único
                 usuario_arduino = form.save(commit=False)
                 usuario_arduino.usuario = request.user
                 usuario_arduino.save()
@@ -95,8 +95,8 @@ def reg(request):
     return render(request, 'dispositivo/registro_dispositivo.html', {'form': form})
 
 def meter(request):
-    eui12 = UsuarioArduino.objects.get(dispositivo_id='eui-a8610a3130467612')  # Reemplaza 'dispositivo_existente' con el dispositivo_id real
-    eui13 = UsuarioArduino.objects.get(dispositivo_id='eui-a8610a3130467613')  # Reemplaza 'dispositivo_existente' con el dispositivo_id real
+    eui12 = UsuarioDispositivo.objects.get(dispositivo_id='eui-a8610a3130467612')  # Reemplaza 'dispositivo_existente' con el dispositivo_id real
+    eui13 = UsuarioDispositivo.objects.get(dispositivo_id='eui-a8610a3130467613')  # Reemplaza 'dispositivo_existente' con el dispositivo_id real
 
     temp=10.2
     temp1=33.2
@@ -104,10 +104,10 @@ def meter(request):
     hum1=12.123
 
     for i in range(67):
-        test=DatosDispositivo(dispositivo=eui13, temp=temp, hum=hum)
+        test=Datos(dispositivo=eui13, temp=temp, hum=hum)
         test.save()
     for i in range(30):
-        test1=DatosDispositivo(dispositivo=eui12, temp=temp1, hum=hum1)
+        test1=Datos(dispositivo=eui12, temp=temp1, hum=hum1)
         test1.save()
     return HttpResponse
 
@@ -124,7 +124,7 @@ def deco(request):
             numero3 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero3')
             numeroB = data.get('uplink_message', {}).get('decoded_payload', {}).get('numeroB')
             json_eui = data.get('end_device_ids', {}).get('device_id')
-            eui = UsuarioArduino.objects.get(dispositivo_id=json_eui)
+            eui = UsuarioDispositivo.objects.get(dispositivo_id=json_eui)
 
             print("n1:", temp)
             print("n2:", hum)
@@ -136,7 +136,7 @@ def deco(request):
             if numeroB == 1:
                 boolean=True
             
-            deco = DatosDispositivo(dispositivo=eui, temp=temp, hum=hum)
+            deco = Datos(dispositivo=eui, temp=temp, hum=hum)
             deco.save()
             return JsonResponse({'mensaje': 'Datos guardados correctamente'})
         except Exception as e:
@@ -146,13 +146,13 @@ def deco(request):
     
 
 def listar_dispositivos(request):
-    dispositivos = UsuarioArduino.objects.filter(usuario=request.user)
+    dispositivos = UsuarioDispositivo.objects.filter(usuario=request.user)
     return render(request, 'dispositivo/eliminar_dispositivo.html', {'dispositivos': dispositivos})
 
 def eliminar_dispositivos(request):
     if request.method == 'POST':
         dispositivos_a_eliminar = request.POST.getlist('dispositivos_a_eliminar')
-        UsuarioArduino.objects.filter(id__in=dispositivos_a_eliminar).delete()
+        UsuarioDispositivo.objects.filter(id__in=dispositivos_a_eliminar).delete()
         messages.success(request, 'Dispositivos eliminados exitosamente.')
         return redirect('elimina')
 
