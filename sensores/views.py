@@ -68,8 +68,8 @@ def deco(request):
             # Parsear el JSON de la solicitud
             data = json.loads(request.body)
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
-            temp = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
-            hum = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero2')
+            temp = data.get('uplink_message', {}).get('decoded_payload', {}).get('temp')
+            hum = data.get('uplink_message', {}).get('decoded_payload', {}).get('hum')
             ppm = data.get('uplink_message', {}).get('decoded_payload', {}).get('ppm')
             lemo_raw = data.get('uplink_message', {}).get('decoded_payload', {}).get('lemo')
             json_eui = data.get('end_device_ids', {}).get('device_id')
