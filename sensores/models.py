@@ -13,5 +13,5 @@ class Datos(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     temp = models.FloatField()
     hum = models.FloatField()
-    limo = models.FloatField()
-    detec = models.BooleanField()
+    ppm = models.FloatField()
+    lemo = models.BooleanField()

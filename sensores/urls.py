@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import tabla, reg, meter, deco, eliminar_dispositivos, listar_dispositivos
+from .views import tabla, reg,  deco, eliminar_dispositivos, listar_dispositivos
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -8,8 +8,7 @@ urlpatterns = [
     path('registrar', reg, name="reg" ),
     path('eliminar_dispositivos', eliminar_dispositivos, name="eliminar_dispositivos" ),
     path('eliminar', listar_dispositivos, name="elimina" ),
-    path('deco', deco, name="deco" ),
-    path('meter', meter, name="meter" )
+    path('deco', deco, name="deco" )
 ]
 
 

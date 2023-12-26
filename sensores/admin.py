@@ -5,7 +5,7 @@ class userAD(admin.ModelAdmin):
     list_display=("usuario","dispositivo_id", "alias")
 
 class DatosAdmin(admin.ModelAdmin):
-    list_display = ("mostrar_dispositivo_id", "fecha_creacion", "temp", "hum","limo", "detec")
+    list_display = ("mostrar_dispositivo_id", "fecha_creacion", "temp", "hum","ppm", "lemo")
 
     def mostrar_dispositivo_id(self, obj):
         return obj.dispositivo.dispositivo_id

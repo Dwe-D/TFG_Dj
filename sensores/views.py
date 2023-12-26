@@ -61,24 +61,6 @@ def reg(request):
 
     return render(request, 'dispositivo/registro_dispositivo.html', {'form': form})
 
-def meter(request):
-    eui12 = UsuarioDispositivo.objects.get(dispositivo_id='eui-a8610a3130467612')  # Reemplaza 'dispositivo_existente' con el dispositivo_id real
-    eui13 = UsuarioDispositivo.objects.get(dispositivo_id='eui-a8610a3130467613')  # Reemplaza 'dispositivo_existente' con el dispositivo_id real
-
-    temp=10.2
-    temp1=33.2
-    hum=77.3
-    hum1=12.123
-
-    for i in range(67):
-        test=Datos(dispositivo=eui13, temp=temp, hum=hum)
-        test.save()
-    for i in range(30):
-        test1=Datos(dispositivo=eui12, temp=temp1, hum=hum1)
-        test1.save()
-    return HttpResponse
-
-
 @csrf_exempt
 def deco(request):
     if request.method == 'POST':
@@ -88,22 +70,23 @@ def deco(request):
             # Acceder a los valores de numero1 y numero2 dentro de decoded_payload
             temp = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero1')
             hum = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero2')
-            numero3 = data.get('uplink_message', {}).get('decoded_payload', {}).get('numero3')
-            numeroB = data.get('uplink_message', {}).get('decoded_payload', {}).get('numeroB')
+            ppm = data.get('uplink_message', {}).get('decoded_payload', {}).get('ppm')
+            lemo_raw = data.get('uplink_message', {}).get('decoded_payload', {}).get('lemo')
             json_eui = data.get('end_device_ids', {}).get('device_id')
             eui = UsuarioDispositivo.objects.get(dispositivo_id=json_eui)
 
             print("n1:", temp)
             print("n2:", hum)
-            print("n3:", numero3)
-            print("nB:", numeroB)
+            print("n3:", ppm)
+            print("nB:", lemo_raw)
             print("EUI:", json_eui)
-            boolean=False 
+
+            lemo=False 
             # Verificar si los campos son None y establecer valores predeterminados
-            if numeroB == 1:
-                boolean=True
+            if lemo == 1:
+                lemo=True
             
-            deco = Datos(dispositivo=eui, temp=temp, hum=hum)
+            deco = Datos(dispositivo=eui, temp=temp, hum=hum, ppm=ppm, lemo=lemo)
             deco.save()
             return JsonResponse({'mensaje': 'Datos guardados correctamente'})
         except Exception as e:
