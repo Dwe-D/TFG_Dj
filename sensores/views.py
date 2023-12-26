@@ -83,7 +83,7 @@ def deco(request):
 
             lemo=False 
             # Verificar si los campos son None y establecer valores predeterminados
-            if lemo == 1:
+            if lemo_raw == 1:
                 lemo=True
             
             deco = Datos(dispositivo=eui, temp=temp, hum=hum, ppm=ppm, lemo=lemo)
