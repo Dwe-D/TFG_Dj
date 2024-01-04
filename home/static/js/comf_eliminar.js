@@ -1,5 +1,6 @@
 function confirmarEliminacion() {
-    if (confirm("¿Estás seguro de que deseas eliminar los dispositivos seleccionados?")) {
+    if (confirm("¿Estás seguro?")) {
         document.getElementById("eliminarForm").submit();
     }
 }
+

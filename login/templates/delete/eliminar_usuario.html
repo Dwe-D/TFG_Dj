@@ -4,10 +4,10 @@
 
 {% block content %}
 <br/>
-  <h2>Eliminar Usuario</h2>
-  <p>¿Estás seguro de que quieres eliminar tu cuenta?</p>
-  <form method="post">
-    {% csrf_token %}
-    <input type="submit" value="Eliminar">
-  </form>
+
+	<p style="color: #e44c65; margin-left: 3%;">¿Estás seguro de que deseas eliminar tu cuenta?</p>
+    <form id="eliminarForm" method="post" action="{% url 'eliminar_usuario' %}">
+        {% csrf_token %}
+        <button type="button" style="width: min-content; margin-left: 5%;" class="button primary small fit" onclick="confirmarEliminacion() ">Eliminar cuenta</button>
+    </form>
 {% endblock %}
