@@ -102,7 +102,6 @@ DATABASES = {
 """
 DATABASES = {
     "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
-    # $env:DATABASE_URL="postgres://bd_test_user:spfPWIGhCDXICGmDIo5Mu3viPHCbl4Ai@dpg-clnnijhjvg7s73a0mp30-a.frankfurt-postgres.render.com/bd_test"
 }
 
 
