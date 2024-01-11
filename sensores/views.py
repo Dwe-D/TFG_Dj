@@ -15,14 +15,10 @@ def tabla(request):
         cantidad_por_pagina = 25
         page = request.GET.get('page', 1)
 
-        # Filtra los Datos asociados al usuario actual y ordena por fecha de creación descendente
         datos_tabla = Datos.objects.filter(dispositivo__usuario=request.user).order_by('-fecha_creacion')
-
-        # Calcular el número máximo de páginas
         num_paginas = ceil(len(datos_tabla) / cantidad_por_pagina)
-
-        # Usar Paginator para obtener la porción de datos para la página actual
         paginator = Paginator(datos_tabla, cantidad_por_pagina)
+
         try:
             tabla = paginator.page(page)
         except PageNotAnInteger:
@@ -30,7 +26,6 @@ def tabla(request):
         except EmptyPage:
             tabla = paginator.page(paginator.num_pages)
 
-        # Pasa los datos al template
         context = {
             'tabla': tabla,
             'page': int(page),

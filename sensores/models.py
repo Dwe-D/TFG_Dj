@@ -6,8 +6,6 @@ class UsuarioDispositivo(models.Model):
     dispositivo_id = models.CharField(max_length=50, unique=True)
     alias = models.CharField(max_length=50, blank=True, null=True)
 
-
-
 class Datos(models.Model):
     dispositivo = models.ForeignKey(UsuarioDispositivo, on_delete=models.CASCADE, related_name='datos_dispositivos')
     fecha_creacion = models.DateTimeField(auto_now_add=True)

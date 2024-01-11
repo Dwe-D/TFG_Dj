@@ -5,9 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 
 # Create your views here.
-
-
-class VRegistro(View):
+class registro(View):
 
     def get(self, request):
         form=UserCreationForm()
@@ -21,8 +19,7 @@ class VRegistro(View):
             return redirect('Home')
         else:
             for msg in form.error_messages:
-                messages.error(request, form.error_messages[msg])
-                
+                messages.error(request, form.error_messages[msg])               
             return render(request, "registro/registro.html", {"form":form})
         
 def cerrar_sesion(request):
@@ -32,12 +29,10 @@ def cerrar_sesion(request):
 def logear(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
-
         if form.is_valid():
             nombre = form.cleaned_data.get("username")
             passw = form.cleaned_data.get("password")
             usuario = authenticate(username=nombre, password=passw)
-
             if usuario is not None:
                 login(request, usuario)
                 return redirect('Home')
@@ -51,7 +46,6 @@ def logear(request):
 
 def eliminar_usuario(request):
     if request.method == 'POST':
-        # Aquí puedes añadir la lógica para eliminar la cuenta del usuario actual
         request.user.delete()
         messages.success(request, 'Cuenta eliminada exitosamente.')
         return redirect('Home')
