@@ -1,0 +1,19 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+  <form method="post" action="{% url 'tablaPPM' %}">
+    {% csrf_token %}
+
+    <br>
+    <h1 style="color: #e44c65; margin-left: 1.5%;">Filtrar por PPM mayor a:</h1>
+    <div style="margin-left: 1.5%;">
+        <label for="ppmBusqueda"></label>
+        <input type="number" id="ppmBusqueda" name="ppm_busqueda" step="0.01" style="display: block; color: black;">
+        <br>
+
+        <button type="submit" class="button primary small fit" style="width: min-content;">Buscar Datos</button>
+    </div>
+  </form>
+
+{% endblock %}

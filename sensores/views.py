@@ -1,40 +1,12 @@
 # Create your views here.
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from math import ceil
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib import messages
 from .forms import RegistroDispositivoForm
 from .models import UsuarioDispositivo, Datos
 
-# Create your views here.
-def tabla(request):
-    if request.user.is_authenticated:
-        cantidad_por_pagina = 25
-        page = request.GET.get('page', 1)
 
-        datos_tabla = Datos.objects.filter(dispositivo__usuario=request.user).order_by('-fecha_creacion')
-        num_paginas = ceil(len(datos_tabla) / cantidad_por_pagina)
-        paginator = Paginator(datos_tabla, cantidad_por_pagina)
-
-        try:
-            tabla = paginator.page(page)
-        except PageNotAnInteger:
-            tabla = paginator.page(1)
-        except EmptyPage:
-            tabla = paginator.page(paginator.num_pages)
-
-        context = {
-            'tabla': tabla,
-            'page': int(page),
-            'cantidad_por_pagina': cantidad_por_pagina,
-            'num_paginas': num_paginas,
-        }
-        return render(request, "tablas/tabla_test.html", context)
-    else:
-        return redirect('login')
 
 @csrf_exempt
 def deco(request):

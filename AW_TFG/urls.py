@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('login/', include('login.urls')),
     path('dispositivos/', include('sensores.urls')),
+    path('datos/', include('datos.urls')),
 ]
 
 urlpatterns+=staticfiles_urlpatterns()

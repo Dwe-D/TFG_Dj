@@ -1,0 +1,24 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+<form method="post" action="{% url 'tablaD' %}">
+  {% csrf_token %}
+
+  <br>
+  <h1 style="color: #e44c65; margin-left: 1.5%;">Selecciona un dispositivo:</h1>
+
+  <ul style="list-style-type: none;">
+    {% for dispositivo in dispositivos %}
+      <li>
+        <div class="col-6 col-12-medium">
+          <input type="checkbox" id="{{ dispositivo.id }}" name="dispositivos_seleccionados" value="{{ dispositivo.id }}">
+          <label for="{{ dispositivo.id }}"> {{ dispositivo.alias|default:dispositivo.dispositivo_id }} - EUI: {{ dispositivo.dispositivo_id }} </label>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <br>
+  <button type="submit" class="button primary small fit" style="width: min-content; margin-left: 1.5%;">Buscar Datos</button>
+</form>
+
+{% endblock %}

@@ -31,7 +31,16 @@
 					<li>
 						<a href="#">Menu</a>
 						<ul>
-							<li><a href="{% url 'datos' %}">Datos</a></li>
+							<li>
+								<a href="#">Medidas</a>
+								<ul>
+									<li><a href="{% url 'datos' %}">Todos</a></li>
+									<li><a href="{% url 'list_D' %}">Dispositivo</a></li>
+									<li><a href="{% url 'list_DF' %}">Dispositivo y fecha</a></li>
+									<li><a href="{% url 'list_DPPM' %}">Dispositivo y PPM</a></li>
+									<li><a href="{% url 'list_PPM' %}">PPM</a></li>
+								</ul>
+							</li>
 							<li><a href="{% url 'reg' %}">Registrar dispositivo</a></li>
 							<li><a href="{% url 'elimina' %}">Eliminar dispositivo</a></li>
 							<li><a href="{% url 'eliminar_usuario' %}">Borrar cuenta</a></li>
@@ -64,7 +73,7 @@
 		{% endblock %}
 
 		<!-- Footer -->
-		<footer id="footer" >
+		<footer id="footer" " >
 			<ul class="icons">
 				<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
 				<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
