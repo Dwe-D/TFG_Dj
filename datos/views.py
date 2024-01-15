@@ -5,7 +5,7 @@ from math import ceil
 # Create your views here.
 
 # Función para obtener la tabla paginada
-def obtener_tabla_paginada(datos_tabla, page, cantidad_por_pagina):
+def paginas(datos_tabla, page, cantidad_por_pagina):
     num_paginas = ceil(len(datos_tabla) / cantidad_por_pagina)
     paginator = Paginator(datos_tabla, cantidad_por_pagina)
 
@@ -25,7 +25,7 @@ def tabla(request):
         datos_tabla = Datos.objects.filter(dispositivo__usuario=request.user).order_by('-fecha_creacion')
         page = request.GET.get('page', 1)
 
-        tabla, page, cantidad_por_pagina, num_paginas = obtener_tabla_paginada(datos_tabla, page, cantidad_por_pagina)
+        tabla, page, cantidad_por_pagina, num_paginas = paginas(datos_tabla, page, cantidad_por_pagina)
 
         context = {
             'tabla': tabla,
@@ -62,7 +62,7 @@ def tabla_DF(request):
         cantidad_por_pagina = 25
         page = request.GET.get('page', 1)
 
-        tabla, page, cantidad_por_pagina, num_paginas = obtener_tabla_paginada(datos_filtrados, page, cantidad_por_pagina)
+        tabla, page, cantidad_por_pagina, num_paginas = paginas(datos_filtrados, page, cantidad_por_pagina)
 
         context = {
             'tabla': tabla,
@@ -90,7 +90,7 @@ def tabla_PPM(request):
         cantidad_por_pagina = 25
         page = request.GET.get('page', 1)
 
-        tabla, page, cantidad_por_pagina, num_paginas = obtener_tabla_paginada(datos_filtrados, page, cantidad_por_pagina)
+        tabla, page, cantidad_por_pagina, num_paginas = paginas(datos_filtrados, page, cantidad_por_pagina)
 
         context = {
             'tabla': tabla,
@@ -124,7 +124,7 @@ def tabla_DPPM(request):
         cantidad_por_pagina = 25
         page = request.GET.get('page', 1)
 
-        tabla, page, cantidad_por_pagina, num_paginas = obtener_tabla_paginada(datos_filtrados, page, cantidad_por_pagina)
+        tabla, page, cantidad_por_pagina, num_paginas = paginas(datos_filtrados, page, cantidad_por_pagina)
 
         context = {
             'tabla': tabla,
@@ -153,7 +153,7 @@ def tabla_D(request):
         cantidad_por_pagina = 25
         page = request.GET.get('page', 1)
 
-        tabla, page, cantidad_por_pagina, num_paginas = obtener_tabla_paginada(datos_filtrados, page, cantidad_por_pagina)
+        tabla, page, cantidad_por_pagina, num_paginas = paginas(datos_filtrados, page, cantidad_por_pagina)
 
         context = {
             'tabla': tabla,
