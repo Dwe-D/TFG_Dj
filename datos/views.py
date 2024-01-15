@@ -74,7 +74,35 @@ def tabla_DF(request):
         return render(request, "tablas/tabla.html", context)
     else:
         return redirect('login')
-    
+
+def listar_F(request):	
+    return render(request, "filtros/filtro_fecha.html")
+
+def tabla_F(request):
+    if request.user.is_authenticated and request.method == 'POST':
+        fecha_busqueda = request.POST.get('fecha_busqueda')
+
+        datos_filtrados = Datos.objects.filter(
+            dispositivo__usuario=request.user,
+            fecha_creacion__date=fecha_busqueda
+        ).order_by('-fecha_creacion')
+        
+        cantidad_por_pagina = 25
+        page = request.GET.get('page', 1)
+
+        tabla, page, cantidad_por_pagina, num_paginas = paginas(datos_filtrados, page, cantidad_por_pagina)
+
+        context = {
+            'tabla': tabla,
+            'page': page,
+            'cantidad_por_pagina': cantidad_por_pagina,
+            'num_paginas': num_paginas,
+        }
+
+        return render(request, "tablas/tabla.html", context)
+    else:
+        return redirect('login')
+
 def listar_PPM(request):	
     return render(request, "filtros/filtro_ppm.html")
 
@@ -102,7 +130,9 @@ def tabla_PPM(request):
         return render(request, "tablas/tabla.html", context)
     else:
         return redirect('login')
-    
+
+
+
 def listar_DPPM(request):
     dispositivos = UsuarioDispositivo.objects.filter(usuario=request.user)
     return render(request, 'filtros/filtro_dis_ppm.html', {'dispositivos': dispositivos})

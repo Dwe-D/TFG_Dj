@@ -1,0 +1,19 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+<form method="post" action="{% url 'tablaF' %}">
+  {% csrf_token %}
+
+  <div style="margin-left: 1.5%;">
+    <label for="fechaBusqueda" style="color: #e44c65; ">Seleccione la Fecha:</label>
+    <input type="date" id="fechaBusqueda" name="fecha_busqueda" style="display: block; color: black; ">
+    
+  </div>
+  <br>
+  <button type="submit" class="button primary small fit" style="width: min-content; margin-left: 1.5%;">Buscar Datos</button>
+
+</form>
+
+{% endblock %}
+
