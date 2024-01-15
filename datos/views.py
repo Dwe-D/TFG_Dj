@@ -19,7 +19,7 @@ def paginas(datos_tabla, page, cantidad_por_pagina):
     return tabla, int(page), cantidad_por_pagina, num_paginas
 
 # Vista principal
-def tabla(request):
+def No_Fil(request):
     if request.user.is_authenticated:
         cantidad_por_pagina = 25
         datos_tabla = Datos.objects.filter(dispositivo__usuario=request.user).order_by('-fecha_creacion')
@@ -46,18 +46,11 @@ def tabla_DF(request):
         dispositivos_seleccionados = request.POST.getlist('dispositivos_seleccionados')
         fecha_busqueda = request.POST.get('fecha_busqueda')
 
-        # Imprime los valores de filtro para verificar
-        print("Dispositivos seleccionados:", dispositivos_seleccionados)
-        print("Fecha de búsqueda:", fecha_busqueda)
-
         datos_filtrados = Datos.objects.filter(
             dispositivo__usuario=request.user,
             dispositivo__id__in=dispositivos_seleccionados,
             fecha_creacion__date=fecha_busqueda
         ).order_by('-fecha_creacion')
-
-        # Imprime la cantidad de datos filtrados
-        print("Cantidad de datos filtrados:", datos_filtrados.count())
 
         cantidad_por_pagina = 25
         page = request.GET.get('page', 1)

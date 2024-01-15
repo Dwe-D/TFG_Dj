@@ -1,10 +1,10 @@
 from django.urls import path
 from django.conf import settings
-from .views import tabla, tabla_DF, listar_DF, listar_PPM, tabla_PPM, tabla_DPPM, listar_DPPM, listar_D, tabla_D, listar_F, tabla_F
+from .views import No_Fil, tabla_DF, listar_DF, listar_PPM, tabla_PPM, tabla_DPPM, listar_DPPM, listar_D, tabla_D, listar_F, tabla_F
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('visualizar', tabla, name="datos"),
+    path('visualizar', No_Fil, name="datos"),
     path('tablaDF', tabla_DF, name="tablaDF"),
     path('list_PPM', listar_PPM, name="list_PPM"),
     path('tablaPPM', tabla_PPM, name="tablaPPM"),
@@ -15,7 +15,6 @@ urlpatterns = [
     path('tablaD', tabla_D, name="tablaD" ),
     path('list_F', listar_F, name="list_F" ),
     path('tablaF', tabla_F, name="tablaF" ),
-
 ]
 
 
