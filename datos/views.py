@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from sensores.models import UsuarioDispositivo, Datos
 from math import ceil
-# Create your views here.
 
 # Función para obtener la tabla paginada
 def paginas(datos_tabla, page, cantidad_por_pagina):
